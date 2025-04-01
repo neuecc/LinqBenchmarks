@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>10.0</LangVersion>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>13.0</LangVersion>
     <Configuration>Release</Configuration>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
@@ -38,6 +38,12 @@
 
   <ItemGroup>
     <Compile Remove="**\*.CisternValueLinq.cs" />
+    <Compile Remove="List\**" />
+    <Compile Remove="Range\**" />
+    <EmbeddedResource Remove="List\**" />
+    <EmbeddedResource Remove="Range\**" />
+    <None Remove="List\**" />
+    <None Remove="Range\**" />
   </ItemGroup>
 
 </Project>

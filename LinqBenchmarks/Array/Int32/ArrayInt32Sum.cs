@@ -1,68 +1,83 @@
-﻿namespace LinqBenchmarks.Array.Int32;
-
-public partial class ArrayInt32Sum: ArrayInt32BenchmarkBase
+﻿namespace LinqBenchmarks.Array.Int32
 {
-    [Benchmark(Baseline = true)]
-    public int ForLoop()
+    public partial class ArrayInt32Sum : ArrayInt32BenchmarkBase
     {
-        var sum = 0;
-        var array = source;
-        for (var index = 0; index < array.Length; index++)
+        [Benchmark(Baseline = true)]
+        public int ForLoop()
         {
-            var item = array[index];
-            sum += item;
+            var sum = 0;
+            var array = source;
+            for (var index = 0; index < array.Length; index++)
+            {
+                var item = array[index];
+                sum += item;
+            }
+            return sum;
         }
-        return sum;
-    }
 
-    [Benchmark]
-    public int ForeachLoop()
-    {
-        var sum = 0;
-        foreach (var item in source)
+        [Benchmark]
+        public int ForeachLoop()
         {
-            sum += item;
+            var sum = 0;
+            foreach (var item in source)
+            {
+                sum += item;
+            }
+            return sum;
         }
-        return sum;
+
+        [Benchmark]
+        public int Linq()
+            => source.Sum();
+
+        [Benchmark]
+        public int LinqFaster()
+            => source.SumF();
+
+        [Benchmark]
+        public int LinqFaster_SIMD()
+            => source.SumS();
+
+        [Benchmark]
+        public int LinqFasterer()
+            => EnumerableF.SumF(source);
+
+        [Benchmark]
+        public int LinqAF()
+            => global::LinqAF.ArrayExtensionMethods.Sum(source);
+
+        [Benchmark]
+        public int StructLinq()
+            => source
+                .ToStructEnumerable()
+                .Sum();
+
+        [Benchmark]
+        public int StructLinq_ValueDelegate()
+        {
+            return source
+                .ToStructEnumerable()
+                .Sum(x => x);
+        }
+
+        [Benchmark]
+        public int Hyperlinq()
+            => source
+                .AsValueEnumerable()
+                .Sum();
     }
+}
 
-    [Benchmark]
-    public int Linq()
-        => source.Sum();
-
-    [Benchmark]
-    public int LinqFaster()
-        => source.SumF();
-
-    [Benchmark]
-    public int LinqFaster_SIMD()
-        => source.SumS();
-
-    [Benchmark]
-    public int LinqFasterer()
-        => EnumerableF.SumF(source);
-
-    [Benchmark]
-    public int LinqAF()
-        => global::LinqAF.ArrayExtensionMethods.Sum(source);
-
-    [Benchmark]
-    public int StructLinq()
-        => source
-            .ToStructEnumerable()
-            .Sum();
-
-    [Benchmark]
-    public int StructLinq_ValueDelegate()
+namespace LinqBenchmarks.Array.Int32
+{
+    using ZLinq;
+    public partial class ArrayInt32Sum : ArrayInt32BenchmarkBase
     {
-        return source
-            .ToStructEnumerable()
-            .Sum(x => x);
-    }
 
-    [Benchmark]
-    public int Hyperlinq()
-        => source
-            .AsValueEnumerable()
-            .Sum();
+        [Benchmark]
+        public int ZLinq()
+            => source
+                .AsValueEnumerable()
+                .Sum();
+    }
 }

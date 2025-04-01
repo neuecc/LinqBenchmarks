@@ -1,94 +1,109 @@
-﻿namespace LinqBenchmarks.Array.ValueType;
-
-public partial class ArrayValueTypeWhereSelectToArray: ValueTypeArrayBenchmarkBase
+﻿namespace LinqBenchmarks.Array.ValueType
 {
-    [Benchmark(Baseline = true)]
-    public FatValueType[] ForLoop()
+    public partial class ArrayValueTypeWhereSelectToArray : ValueTypeArrayBenchmarkBase
     {
-        var list = new List<FatValueType>();
-        var array = source;
-        for (var index = 0; index < array.Length; index++)
+        [Benchmark(Baseline = true)]
+        public FatValueType[] ForLoop()
         {
-            ref readonly var item = ref array[index];
-            if (item.IsEven())
-                list.Add(item * 3);
+            var list = new List<FatValueType>();
+            var array = source;
+            for (var index = 0; index < array.Length; index++)
+            {
+                ref readonly var item = ref array[index];
+                if (item.IsEven())
+                    list.Add(item * 3);
+            }
+            return list.ToArray();
         }
-        return list.ToArray();
-    }
 
-    [Benchmark]
-    public FatValueType[] ForeachLoop()
-    {
-        var list = new List<FatValueType>();
-        foreach (var item in source)
+        [Benchmark]
+        public FatValueType[] ForeachLoop()
         {
-            if (item.IsEven())
-                list.Add(item * 3);
+            var list = new List<FatValueType>();
+            foreach (var item in source)
+            {
+                if (item.IsEven())
+                    list.Add(item * 3);
+            }
+            return list.ToArray();
         }
-        return list.ToArray();
+
+        [Benchmark]
+        public FatValueType[] Linq()
+            => System.Linq.Enumerable
+                .Where(source, item => item.IsEven())
+                .Select(item => item * 3)
+                .ToArray();
+
+        [Benchmark]
+        public FatValueType[] LinqFaster()
+            => source
+                .WhereSelectF(item => item.IsEven(), item => item * 3);
+
+        [Benchmark]
+        public FatValueType[] LinqFasterer()
+            => EnumerableF.ToArrayF(
+                EnumerableF.SelectF(
+                    EnumerableF.WhereF(source, item => item.IsEven()),
+                    item => item * 3)
+            );
+
+        [Benchmark]
+        public FatValueType[] LinqAF()
+            => global::LinqAF.ArrayExtensionMethods.Where(source, item => item.IsEven()).Select(item => item * 3).ToArray();
+
+        [Benchmark]
+        public FatValueType[] StructLinq()
+            => source
+                .ToRefStructEnumerable()
+                .Where((in FatValueType item) => item.IsEven())
+                .Select((in FatValueType item) => item * 3)
+                .ToArray();
+
+        [Benchmark]
+        public FatValueType[] StructLinq_ValueDelegate()
+        {
+            var predicate = new FatValueTypeIsEven();
+            var selector = new TripleOfFatValueType();
+            return source.ToRefStructEnumerable()
+                .Where(ref predicate, x => x)
+                .Select(ref selector, x => x, x => x)
+                .ToArray(x => x);
+        }
+
+        [Benchmark]
+        public FatValueType[] Hyperlinq()
+            => source.AsValueEnumerable()
+                .Where(item => item.IsEven())
+                .Select(item => item * 3)
+                .ToArray();
+
+        [Benchmark]
+        public FatValueType[] Hyperlinq_ValueDelegate()
+            => source.AsValueEnumerable()
+                .Where<FatValueTypeIsEven>()
+                .Select<FatValueType, TripleOfFatValueType>()
+                .ToArray();
+
+        [Benchmark]
+        public FatValueType[] Faslinq()
+            => FaslinqExtensions.WhereSelect(
+                    source,
+                    item => item.IsEven(),
+                    item => item * 3);
     }
+}
 
-    [Benchmark]
-    public FatValueType[] Linq()
-        => System.Linq.Enumerable
-            .Where(source, item => item.IsEven())
-            .Select(item => item * 3)
-            .ToArray();
-
-    [Benchmark]
-    public FatValueType[] LinqFaster()
-        => source
-            .WhereSelectF(item => item.IsEven(), item => item * 3);
-
-    [Benchmark]
-    public FatValueType[] LinqFasterer()
-        => EnumerableF.ToArrayF(
-            EnumerableF.SelectF(
-                EnumerableF.WhereF(source, item => item.IsEven()), 
-                item => item * 3)
-        );
-
-    [Benchmark]
-    public FatValueType[] LinqAF()
-        => global::LinqAF.ArrayExtensionMethods.Where(source, item => item.IsEven()).Select(item => item * 3).ToArray();
-
-    [Benchmark]
-    public FatValueType[] StructLinq()
-        => source
-            .ToRefStructEnumerable()
-            .Where((in FatValueType item) => item.IsEven())
-            .Select((in FatValueType item) => item * 3)
-            .ToArray();
-
-    [Benchmark]
-    public FatValueType[] StructLinq_ValueDelegate()
+namespace LinqBenchmarks.Array.ValueType
+{
+    using ZLinq;
+    public partial class ArrayValueTypeWhereSelectToArray : ValueTypeArrayBenchmarkBase
     {
-        var predicate = new FatValueTypeIsEven();
-        var selector = new TripleOfFatValueType();
-        return source.ToRefStructEnumerable()
-            .Where(ref predicate, x => x)
-            .Select(ref selector, x => x, x => x)
-            .ToArray(x=> x);
+        [Benchmark]
+        public FatValueType[] ZLinq()
+            => source.AsValueEnumerable()
+                .Where(item => item.IsEven())
+                .Select(item => item * 3)
+                .ToArray();
     }
-
-    [Benchmark]
-    public FatValueType[] Hyperlinq()
-        => source.AsValueEnumerable()
-            .Where(item => item.IsEven())
-            .Select(item => item * 3)
-            .ToArray();
-
-    [Benchmark]
-    public FatValueType[] Hyperlinq_ValueDelegate()
-        => source.AsValueEnumerable()
-            .Where<FatValueTypeIsEven>()
-            .Select<FatValueType, TripleOfFatValueType>()
-            .ToArray();
-
-    [Benchmark]
-    public FatValueType[] Faslinq()
-        => FaslinqExtensions.WhereSelect(
-                source,
-                item => item.IsEven(),
-                item => item * 3);
 }

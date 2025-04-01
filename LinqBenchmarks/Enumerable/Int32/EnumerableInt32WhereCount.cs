@@ -1,53 +1,68 @@
-﻿namespace LinqBenchmarks.Enumerable.Int32;
-
-public partial class EnumerableInt32WhereCount: EnumerableInt32BenchmarkBase
+﻿namespace LinqBenchmarks.Enumerable.Int32
 {
-    [Benchmark(Baseline = true)]
-    public int ForeachLoop()
+    public partial class EnumerableInt32WhereCount : EnumerableInt32BenchmarkBase
     {
-        var count = 0;
-        foreach (var item in source)
+        [Benchmark(Baseline = true)]
+        public int ForeachLoop()
         {
-            if (item.IsEven())
-                count++;
+            var count = 0;
+            foreach (var item in source)
+            {
+                if (item.IsEven())
+                    count++;
+            }
+            return count;
         }
-        return count;
+
+        [Benchmark]
+        public int Linq()
+            => source.Count(item => item.IsEven());
+
+        [Benchmark]
+        public int LinqAF()
+            => LinqAfExtensions.Count(source, item => item.IsEven());
+
+        [Benchmark]
+        public int StructLinq()
+            => source
+                .ToStructEnumerable()
+                .Where(item => item.IsEven())
+                .Count();
+
+        [Benchmark]
+        public int StructLinq_ValueDelegate()
+        {
+            var predicate = new Int32IsEven();
+            return source
+                .ToStructEnumerable()
+                .Where(ref predicate, x => x)
+                .Count(x => x);
+        }
+
+        [Benchmark]
+        public int Hyperlinq()
+            => source.AsValueEnumerable()
+                .Where(item => item.IsEven())
+                .Count();
+
+        [Benchmark]
+        public int Hyperlinq_ValueDelegate()
+            => source.AsValueEnumerable()
+                .Where<Int32IsEven>()
+                .Count();
     }
+}
 
-    [Benchmark]
-    public int Linq()
-        => source.Count(item => item.IsEven());
-
-    [Benchmark]
-    public int LinqAF()
-        => LinqAfExtensions.Count(source, item => item.IsEven());
-
-    [Benchmark]
-    public int StructLinq()
-        => source
-            .ToStructEnumerable()
-            .Where(item => item.IsEven())
-            .Count();
-
-    [Benchmark]
-    public int StructLinq_ValueDelegate()
+namespace LinqBenchmarks.Enumerable.Int32
+{
+    using ZLinq;
+    public partial class EnumerableInt32WhereCount : EnumerableInt32BenchmarkBase
     {
-        var predicate = new Int32IsEven();
-        return source
-            .ToStructEnumerable()
-            .Where(ref predicate, x => x)
-            .Count(x => x);
+
+        [Benchmark]
+        public int ZLinq()
+            => source.AsValueEnumerable()
+                .Where(item => item.IsEven())
+                .Count();
     }
-
-    [Benchmark]
-    public int Hyperlinq()
-        => source.AsValueEnumerable()
-            .Where(item => item.IsEven())
-            .Count();
-
-    [Benchmark]
-    public int Hyperlinq_ValueDelegate()
-        => source.AsValueEnumerable()
-            .Where<Int32IsEven>()
-            .Count();
 }

@@ -1,75 +1,93 @@
-﻿namespace LinqBenchmarks.Enumerable.Int32;
-
-public partial class EnumerableInt32Distinct : EnumerableInt32BenchmarkBase
+﻿namespace LinqBenchmarks.Enumerable.Int32
 {
-    [Benchmark(Baseline = true)]
-    public int ForeachLoop()
+    public partial class EnumerableInt32Distinct : EnumerableInt32BenchmarkBase
     {
-        var set = new HashSet<int>();
-        var sum = 0;
-        foreach (var item in source)
+        [Benchmark(Baseline = true)]
+        public int ForeachLoop()
         {
-            if (set.Add(item))
-                sum += item;
+            var set = new HashSet<int>();
+            var sum = 0;
+            foreach (var item in source)
+            {
+                if (set.Add(item))
+                    sum += item;
+            }
+            return sum;
         }
-        return sum;
-    }
 
-    [Benchmark]
-    public int Linq()
-    {
-        var items = source
-            .Distinct();
-        var sum = 0;
-        foreach (var item in items)
-            sum += item;
-        return sum;
-    }
+        [Benchmark]
+        public int Linq()
+        {
+            var items = source
+                .Distinct();
+            var sum = 0;
+            foreach (var item in items)
+                sum += item;
+            return sum;
+        }
 
-    [Benchmark]
-    public int LinqAF()
-    {
-        var items = LinqAfExtensions
-            .Distinct(source);
-        var sum = 0;
-        foreach (var item in items)
-            sum += item;
-        return sum;
-    }
+        [Benchmark]
+        public int LinqAF()
+        {
+            var items = LinqAfExtensions
+                .Distinct(source);
+            var sum = 0;
+            foreach (var item in items)
+                sum += item;
+            return sum;
+        }
 
-    [Benchmark]
-    public int StructLinq()
-    {
-        var items = source
-            .ToStructEnumerable()
-            .Distinct();
-        var sum = 0;
-        foreach (var item in items)
-            sum += item;
-        return sum;
-    }
+        [Benchmark]
+        public int StructLinq()
+        {
+            var items = source
+                .ToStructEnumerable()
+                .Distinct();
+            var sum = 0;
+            foreach (var item in items)
+                sum += item;
+            return sum;
+        }
 
-    [Benchmark]
-    public int StructLinq_ValueDelegate()
-    {
-        var comparer = new DefaultStructEqualityComparer();
-        var items = source
-            .ToStructEnumerable()
-            .Distinct(comparer, x => x );
-        var sum = 0;
-        foreach (var item in items)
-            sum += item;
-        return sum;
-    }
+        [Benchmark]
+        public int StructLinq_ValueDelegate()
+        {
+            var comparer = new DefaultStructEqualityComparer();
+            var items = source
+                .ToStructEnumerable()
+                .Distinct(comparer, x => x);
+            var sum = 0;
+            foreach (var item in items)
+                sum += item;
+            return sum;
+        }
 
-        
-    [Benchmark]
-    public int Hyperlinq()
+
+        [Benchmark]
+        public int Hyperlinq()
+        {
+            var items = source.AsValueEnumerable().Distinct();
+            var sum = 0;
+            foreach (var item in items)
+                sum += item;
+            return sum;
+        }
+    }
+}
+
+namespace LinqBenchmarks.Enumerable.Int32
+{
+    using ZLinq;
+    public partial class EnumerableInt32Distinct : EnumerableInt32BenchmarkBase
     {
-        var items = source.AsValueEnumerable().Distinct();
-        var sum = 0;
-        foreach (var item in items)
-            sum += item;
-        return sum;
+        [Benchmark]
+        public int ZLinq()
+        {
+            var items = source.AsValueEnumerable().Distinct();
+            var sum = 0;
+            foreach (var item in items)
+                sum += item;
+            return sum;
+        }
     }
 }

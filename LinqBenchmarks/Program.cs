@@ -21,6 +21,9 @@ var config = new DebugInProcessConfig()
 
 #else
 
+args = new[] { "--filter", "*" };
+// args = new[] { "--list" };
+
 var config = DefaultConfig.Instance
     .WithSummaryStyle(SummaryStyle.Default.WithRatioStyle(RatioStyle.Trend))
     .AddDiagnoser(MemoryDiagnoser.Default)
@@ -43,10 +46,10 @@ var config = DefaultConfig.Instance
     //        new EnvironmentVariable("DOTNET_TC_QuickJitForLoops", "1"), // Enable Quick Jit for loop
     //        new EnvironmentVariable("DOTNET_TieredPGO", "1")) // Turn on layered PGO
     //)
-    .AddJob(Job.Default
-        .WithRuntime(CoreRuntime.Core80)
-    )
-    .AddJob(Job.Default
+    //.AddJob(Job.Default
+    //    .WithRuntime(CoreRuntime.Core80)
+    //)
+    .AddJob(Job.ShortRun // Job.Default
         .WithRuntime(CoreRuntime.Core90)
     );
 
@@ -55,7 +58,7 @@ var config = DefaultConfig.Instance
 foreach (var summary in BenchmarkSwitcher.FromAssembly(typeof(LinqBenchmarks.Utils).Assembly).Run(args, config))
     SaveSummary(summary);
 
-        
+
 static void SaveSummary(Summary summary)
 {
     var solutionDir = GetSolutionDirectory();
@@ -122,6 +125,9 @@ static void SaveSummary(Summary summary)
     var faslinqVersion = GetInformationalVersion(typeof(Faslinq.ArrayExtensions).Assembly);
     logger.WriteLine($"- Faslinq: [{faslinqVersion}](https://www.nuget.org/packages/Faslinq/{faslinqVersion})");
 
+    var zlinqVersion = GetInformationalVersion(typeof(ZLinq.ValueEnumerable).Assembly);
+    logger.WriteLine($"- ZLinq: [{zlinqVersion}](https://www.nuget.org/packages/ZLinq/{zlinqVersion})");
+
     logger.WriteLine();
 
     logger.WriteLine("### Results:");
@@ -137,7 +143,7 @@ static string GetInformationalVersion(Assembly assembly)
 static string GetFileVersion(Assembly assembly)
     => GetCustomAttribute<AssemblyFileVersionAttribute>(assembly)?.Version;
 
-static T GetCustomAttribute<T>(Assembly assembly) 
+static T GetCustomAttribute<T>(Assembly assembly)
     where T : Attribute
     => (T)Attribute.GetCustomAttribute(assembly, typeof(T), false);
 
@@ -151,7 +157,7 @@ static string GetSolutionDirectory()
 {
     var dir = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
 
-    while (dir is not null or {Length:0})
+    while (dir is not null or { Length: 0 })
     {
         if (Directory.EnumerateFiles(dir, "*.sln", SearchOption.TopDirectoryOnly).Any())
             return dir;

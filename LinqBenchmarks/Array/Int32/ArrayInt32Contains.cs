@@ -96,5 +96,6 @@ namespace LinqBenchmarks.Array.Int32
             => source
                 .AsValueEnumerable()
                 .Contains(value);
+
     }
 }
