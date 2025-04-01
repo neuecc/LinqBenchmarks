@@ -2,7 +2,7 @@
 // ReSharper disable LoopCanBeConvertedToQuery
 namespace LinqBenchmarks.Enumerable.Int32;
 
-public class EnumerableInt32SkipTakeSelect: EnumerableInt32SkipTakeBenchmarkBase
+public partial class EnumerableInt32SkipTakeSelect: EnumerableInt32SkipTakeBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int Linq()

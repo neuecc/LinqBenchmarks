@@ -2,7 +2,7 @@
 
 namespace LinqBenchmarks;
 
-public class ImmutableArrayInt32BenchmarkBase : BenchmarkBase
+public partial class ImmutableArrayInt32BenchmarkBase : BenchmarkBase
 {
     protected ImmutableArray<int> source;
 

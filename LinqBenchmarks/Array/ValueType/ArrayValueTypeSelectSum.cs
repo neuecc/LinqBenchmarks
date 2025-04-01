@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.Array.ValueType;
 
-public class ArrayValueTypeSelectSum: ValueTypeArrayBenchmarkBase
+public partial class ArrayValueTypeSelectSum: ValueTypeArrayBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int ForLoop()

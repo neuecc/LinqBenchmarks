@@ -2,7 +2,7 @@
 
 namespace LinqBenchmarks.List.Int32;
 
-public class ListInt32Select: Int32ListBenchmarkBase
+public partial class ListInt32Select: Int32ListBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int ForLoop()

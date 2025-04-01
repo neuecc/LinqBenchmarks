@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.Array.Int32;
 
-public class ArrayInt32Distinct : BenchmarkBase
+public partial class ArrayInt32Distinct : BenchmarkBase
 {
     int[] source;
 

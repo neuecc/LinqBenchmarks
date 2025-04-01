@@ -2,7 +2,7 @@
 
 namespace LinqBenchmarks.List.ValueType;
 
-public class ListValueTypeContains : ValueTypeListBenchmarkBase
+public partial class ListValueTypeContains : ValueTypeListBenchmarkBase
 {
     FatValueType value = new(int.MaxValue);
 

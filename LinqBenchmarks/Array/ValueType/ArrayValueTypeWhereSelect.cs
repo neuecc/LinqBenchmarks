@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.Array.ValueType;
 
-public class ArrayValueTypeWhereSelect: ValueTypeArrayBenchmarkBase
+public partial class ArrayValueTypeWhereSelect: ValueTypeArrayBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public FatValueType ForLoop()

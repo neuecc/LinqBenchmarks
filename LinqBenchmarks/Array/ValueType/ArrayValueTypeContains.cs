@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.Array.ValueType;
 
-public class ArrayValueTypeContains: ValueTypeArrayBenchmarkBase
+public partial class ArrayValueTypeContains: ValueTypeArrayBenchmarkBase
 {
     FatValueType value = new(int.MaxValue);
 

@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.Array.ValueType;
 
-public class ArrayValueTypeWhereCount: ValueTypeArrayBenchmarkBase
+public partial class ArrayValueTypeWhereCount: ValueTypeArrayBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int ForLoop()

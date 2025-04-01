@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.Range;
 
-public class Range: RangeBenchmarkBase
+public partial class Range: RangeBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int ForLoop()

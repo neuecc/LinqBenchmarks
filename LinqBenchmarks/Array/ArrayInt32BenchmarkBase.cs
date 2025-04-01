@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks;
 
-public class ArrayInt32BenchmarkBase : BenchmarkBase
+public partial class ArrayInt32BenchmarkBase : BenchmarkBase
 {
     protected int[] source;
 

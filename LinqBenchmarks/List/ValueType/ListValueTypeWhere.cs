@@ -6,7 +6,7 @@ using ListExtensions = Faslinq.ListExtensions;
 
 namespace LinqBenchmarks.List.ValueType;
 
-public class ListValueTypeWhere: ValueTypeListBenchmarkBase
+public partial class ListValueTypeWhere: ValueTypeListBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public FatValueType ForLoop()

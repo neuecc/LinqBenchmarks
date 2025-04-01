@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.Array.Int32;
 
-public class ArrayInt32Sum: ArrayInt32BenchmarkBase
+public partial class ArrayInt32Sum: ArrayInt32BenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int ForLoop()

@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.List.Int32;
 
-public class ListInt32Distinct: BenchmarkBase
+public partial class ListInt32Distinct: BenchmarkBase
 {
     List<int> source;
     List<int> sourceLinqFaster;

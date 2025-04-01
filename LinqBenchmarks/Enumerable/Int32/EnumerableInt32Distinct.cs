@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.Enumerable.Int32;
 
-public class EnumerableInt32Distinct : EnumerableInt32BenchmarkBase
+public partial class EnumerableInt32Distinct : EnumerableInt32BenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int ForeachLoop()

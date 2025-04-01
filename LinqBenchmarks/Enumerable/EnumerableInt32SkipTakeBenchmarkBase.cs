@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks;
 
-public class EnumerableInt32SkipTakeBenchmarkBase : SkipTakeBenchmarkBase
+public partial class EnumerableInt32SkipTakeBenchmarkBase : SkipTakeBenchmarkBase
 {
     protected IEnumerable<int> source;
 

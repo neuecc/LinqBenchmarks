@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks;
 
-public class ArrayInt32SkipTakeBenchmarkBase : SkipTakeBenchmarkBase
+public partial class ArrayInt32SkipTakeBenchmarkBase : SkipTakeBenchmarkBase
 {
     protected int[] source;
 

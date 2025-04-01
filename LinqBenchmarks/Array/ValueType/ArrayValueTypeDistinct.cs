@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.Array.ValueType;
 
-public class ArrayValueTypeDistinct: BenchmarkBase
+public partial class ArrayValueTypeDistinct: BenchmarkBase
 {
     FatValueType[] source;
 

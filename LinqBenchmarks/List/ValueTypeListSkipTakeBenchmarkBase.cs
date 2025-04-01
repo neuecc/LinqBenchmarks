@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks;
 
-public class ValueTypeListSkipTakeBenchmarkBase: SkipTakeBenchmarkBase
+public partial class ValueTypeListSkipTakeBenchmarkBase: SkipTakeBenchmarkBase
 {
     protected List<FatValueType> source;
 

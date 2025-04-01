@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.Array.Int32;
 
-public class ArrayInt32SelectToList: ArrayInt32BenchmarkBase
+public partial class ArrayInt32SelectToList: ArrayInt32BenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public List<int> ForLoop()

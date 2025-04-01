@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks;
 
-public class ValueTypeListBenchmarkBase: BenchmarkBase
+public partial class ValueTypeListBenchmarkBase: BenchmarkBase
 {
     protected List<FatValueType> source;
 

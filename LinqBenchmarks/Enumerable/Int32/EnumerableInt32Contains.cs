@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.Enumerable.Int32;
 
-public class EnumerableInt32Contains: EnumerableInt32BenchmarkBase
+public partial class EnumerableInt32Contains: EnumerableInt32BenchmarkBase
 {
     int value = int.MaxValue;
 

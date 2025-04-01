@@ -7,7 +7,7 @@ using ListExtensions = Faslinq.ListExtensions;
 
 namespace LinqBenchmarks.List.Int32;
 
-public class ListInt32Where: Int32ListBenchmarkBase
+public partial class ListInt32Where: Int32ListBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int ForLoop()

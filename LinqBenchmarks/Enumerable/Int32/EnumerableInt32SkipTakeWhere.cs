@@ -3,7 +3,7 @@
 namespace LinqBenchmarks.Enumerable.Int32;
 
 [BenchmarkCategory("Enumerable", "Int32")]
-public class EnumerableInt32SkipTakeWhere: EnumerableInt32SkipTakeBenchmarkBase
+public partial class EnumerableInt32SkipTakeWhere: EnumerableInt32SkipTakeBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int Linq()

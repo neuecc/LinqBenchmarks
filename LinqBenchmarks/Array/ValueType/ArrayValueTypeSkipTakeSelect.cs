@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.Array.ValueType;
 
-public class ArrayValueTypeSkipTakeSelect: ValueTypeArraySkipTakeBenchmarkBase
+public partial class ArrayValueTypeSkipTakeSelect: ValueTypeArraySkipTakeBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public FatValueType ForLoop()

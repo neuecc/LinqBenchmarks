@@ -7,7 +7,7 @@ using ListExtensions = Faslinq.ListExtensions;
 
 namespace LinqBenchmarks.List.ValueType;
 
-public class ListValueTypeWhereSelect: ValueTypeListBenchmarkBase
+public partial class ListValueTypeWhereSelect: ValueTypeListBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public FatValueType ForLoop()

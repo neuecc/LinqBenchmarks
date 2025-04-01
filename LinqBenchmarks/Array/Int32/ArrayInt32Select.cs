@@ -2,7 +2,7 @@
 // ReSharper disable ForCanBeConvertedToForeach
 namespace LinqBenchmarks.Array.Int32;
 
-public class ArrayInt32Select: ArrayInt32BenchmarkBase
+public partial class ArrayInt32Select: ArrayInt32BenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int ForLoop()

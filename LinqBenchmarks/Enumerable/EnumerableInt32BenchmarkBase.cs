@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks;
 
-public class EnumerableInt32BenchmarkBase : BenchmarkBase
+public partial class EnumerableInt32BenchmarkBase : BenchmarkBase
 {
     protected IEnumerable<int> source;
 

@@ -3,7 +3,7 @@
 // ReSharper disable ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
 namespace LinqBenchmarks.ImmutableArray.Int32;
 
-public class ImmutableArrayInt32Select: ImmutableArrayInt32BenchmarkBase
+public partial class ImmutableArrayInt32Select: ImmutableArrayInt32BenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int ForLoop()

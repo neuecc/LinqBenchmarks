@@ -2,7 +2,7 @@
 
 namespace LinqBenchmarks.List.ValueType;
 
-public class ListValueTypeSkipTakeWhere: ValueTypeListSkipTakeBenchmarkBase
+public partial class ListValueTypeSkipTakeWhere: ValueTypeListSkipTakeBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public FatValueType ForLoop()

@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.List.ValueType;
 
-public class ListValueTypeDistinct: BenchmarkBase
+public partial class ListValueTypeDistinct: BenchmarkBase
 {
     List<FatValueType> source;
     List<FatValueType> sourceLinqFaster;

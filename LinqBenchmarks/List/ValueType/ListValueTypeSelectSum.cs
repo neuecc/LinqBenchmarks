@@ -2,7 +2,7 @@
 
 namespace LinqBenchmarks.List.ValueType;
 
-public class ListValueTypeSelectSum: ValueTypeListBenchmarkBase
+public partial class ListValueTypeSelectSum: ValueTypeListBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int ForLoop()

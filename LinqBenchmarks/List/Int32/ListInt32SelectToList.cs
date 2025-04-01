@@ -3,7 +3,7 @@ using ListExtensions = Faslinq.ListExtensions;
 
 namespace LinqBenchmarks.List.Int32;
 
-public class ListInt32SelectToList: Int32ListBenchmarkBase
+public partial class ListInt32SelectToList: Int32ListBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public List<int> ForLoop()

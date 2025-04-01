@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.ImmutableArray.Int32;
 
-public class ImmutableArrayInt32Contains: ImmutableArrayInt32BenchmarkBase
+public partial class ImmutableArrayInt32Contains: ImmutableArrayInt32BenchmarkBase
 {
     int value = int.MaxValue;
 

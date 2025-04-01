@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.Enumerable.Int32;
 
-public class EnumerableInt32Where: EnumerableInt32BenchmarkBase
+public partial class EnumerableInt32Where: EnumerableInt32BenchmarkBase
 {
     [BenchmarkCategory("Enumerable", "Int32")]
     [Benchmark(Baseline = true)]

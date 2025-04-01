@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks;
 
-public class ValueTypeArrayBenchmarkBase: BenchmarkBase
+public partial class ValueTypeArrayBenchmarkBase: BenchmarkBase
 {
     protected FatValueType[] source;
 

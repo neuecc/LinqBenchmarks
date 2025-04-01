@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks;
 
-public class BenchmarkBase
+public partial class BenchmarkBase
 {
     public int Seed = 42;
 

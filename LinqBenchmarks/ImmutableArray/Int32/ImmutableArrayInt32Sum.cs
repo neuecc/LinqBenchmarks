@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.ImmutableArray.Int32;
 
-public class ImmutableArrayInt32Sum: ImmutableArrayInt32BenchmarkBase
+public partial class ImmutableArrayInt32Sum: ImmutableArrayInt32BenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int ForLoop()

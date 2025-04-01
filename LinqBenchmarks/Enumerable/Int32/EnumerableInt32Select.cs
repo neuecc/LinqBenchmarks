@@ -2,7 +2,7 @@
 // ReSharper disable ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
 namespace LinqBenchmarks.Enumerable.Int32;
 
-public class EnumerableInt32Select: EnumerableInt32BenchmarkBase
+public partial class EnumerableInt32Select: EnumerableInt32BenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int ForeachLoop()

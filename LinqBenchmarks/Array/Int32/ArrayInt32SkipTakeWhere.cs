@@ -1,6 +1,6 @@
 ﻿namespace LinqBenchmarks.Array.Int32;
 
-public class ArrayInt32SkipTakeWhere: ArrayInt32SkipTakeBenchmarkBase
+public partial class ArrayInt32SkipTakeWhere: ArrayInt32SkipTakeBenchmarkBase
 {
     [Benchmark(Baseline = true)]
     public int ForLoop()

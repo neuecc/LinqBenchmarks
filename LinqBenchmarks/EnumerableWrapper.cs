@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace LinqBenchmarks;
 
-public class EnumerableWrapper<T>
+public partial class EnumerableWrapper<T>
     : IEnumerable<T>
 {
     readonly T[] array;

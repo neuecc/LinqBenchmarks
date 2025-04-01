@@ -2,7 +2,7 @@
 
 namespace LinqBenchmarks;
 
-public class ImmutableArrayInt32SkipTakeBenchmarkBase : SkipTakeBenchmarkBase
+public partial class ImmutableArrayInt32SkipTakeBenchmarkBase : SkipTakeBenchmarkBase
 {
     protected ImmutableArray<int> source;
 
